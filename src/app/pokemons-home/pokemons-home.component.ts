@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PokemonResult } from '../app.component';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-pokemons-home',
@@ -22,11 +24,11 @@ export class PokemonsHomeComponent implements OnInit {
   isSearchTriggered: boolean = false;
   noPokemonFound: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(private service: PokemonService,private spinner: NgxSpinnerService){}
 
   ngOnInit(){
-    this.http.get(this.baseUrl).subscribe((response: any )=>{
-        console.log(response);
+    this.spinner.show();
+    this.service.getPokemons(this.baseUrl).subscribe((response: any )=>{
         this.listofPokemons = new Array<PokemonResult>();
         this.filteredList = new Array<PokemonResult>();
         this.totalResults = response.count;
@@ -41,15 +43,15 @@ export class PokemonsHomeComponent implements OnInit {
           });
           this.lastIndex = this.listofPokemons.length;
           this.filteredList = this.listofPokemons;
+          this.spinner.hide();
        });
        
   }
 
   onScroll(){
-    console.log('scroll event tirggered');
     if(this.nextUrl && this.nextUrl !== undefined){
-    this.http.get(this.nextUrl).subscribe((response: any )=>{
-      console.log(response);
+    this.spinner.show();
+    this.service.getPokemons(this.nextUrl).subscribe((response: any )=>{
       this.nextUrl = response.next;
       this.previousUrl = response.previous;
       response.results.forEach(resp =>{
@@ -59,9 +61,8 @@ export class PokemonsHomeComponent implements OnInit {
           detailsUrl: resp.url
         });
         });
+        this.spinner.hide();
         this.lastIndex = this.listofPokemons.length;
-       console.log('result is :');
-       console.log(this.listofPokemons);
      });
     }
   }
@@ -90,7 +91,8 @@ public searchPokemon(){
 }
 
 public searchOnePokemon(searchQuery: any){
-  this.http.get(this.baseUrl+searchQuery).subscribe((response: any )=>{
+  this.spinner.show();
+  this.service.getPokemons(this.baseUrl+searchQuery).subscribe((response: any )=>{
     if(response){
     this.filteredList = new Array<PokemonResult>();
       this.filteredList.push({
@@ -101,8 +103,10 @@ public searchOnePokemon(searchQuery: any){
       if(this.filteredList.length === 0){
         this.noPokemonFound = true;
       }
+      this.spinner.hide();
     }
 },  error => {
+  this.spinner.hide();
   this.noPokemonFound = true;
 });
 }

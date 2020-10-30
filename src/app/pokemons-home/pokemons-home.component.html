@@ -4,7 +4,8 @@
       <mat-form-field  appearance="outline" style="width: 100%;">
         <mat-label>Search a Pokemon</mat-label>
         <input matInput [(ngModel)]="searchQuery" required>
-        <mat-icon class="searchIcon" (click)="searchQuery && searchQuery !== '' ? searchPokemon() : null">search</mat-icon>
+        <mat-icon class="searchIcon" (click)="searchQuery && searchQuery !== '' ? searchPokemon() : null"
+        (keyup.enter)="searchQuery && searchQuery !== '' ? searchPokemon() : null">search</mat-icon>
         <mat-error>Search field is Empty</mat-error>
       </mat-form-field>
     </div>
@@ -45,3 +46,7 @@
     </div>
   </div>
   </ng-container>
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+    <p style="color: white">Please Wait. </p>  
+    </ngx-spinner>
