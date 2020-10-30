@@ -1,0 +1,47 @@
+<ng-container class="container">
+  <div class="col-12">
+    <div class="col-md-4 searchInput" style="padding-left: 60%;">
+      <mat-form-field  appearance="outline" style="width: 100%;">
+        <mat-label>Search a Pokemon</mat-label>
+        <input matInput [(ngModel)]="searchQuery" required>
+        <mat-icon class="searchIcon" (click)="searchQuery && searchQuery !== '' ? searchPokemon() : null">search</mat-icon>
+        <mat-error>Search field is Empty</mat-error>
+      </mat-form-field>
+    </div>
+
+  <table mat-table class="table-hover" style="width: 60%">
+      <thead style="font-weight: bold;">
+        <th>Pokemon ID</th>
+        <th>Pokemon Name</th>
+        <th></th>
+      </thead>
+      <tbody class="pageScroll" *ngIf="!isSearchTriggered"  infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" 
+      (scrolled)="onScroll();" [scrollWindow]="false">
+      <tr *ngFor="let pokemon of filteredList" class="col-4">
+        <td><img src="/favicon.png"><div style="padding-left: 6%;display: inline;vertical-align: super;">
+          {{pokemon.pokemonId}}</div></td>
+        <td>{{ pokemon.name | uppercase}}</td>
+        <td><a [routerLink]="'/details'" [queryParams]="{ id : pokemon.pokemonId }">Click to know more...</a></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="isSearchTriggered">
+    <tr *ngFor="let pokemon of filteredList" class="col-4">
+      <td><img src="/favicon.png"><div style="padding-left: 6%;display: inline;vertical-align: super;">
+        {{pokemon.pokemonId}}</div></td>
+      <td>{{ pokemon.name | uppercase}}</td>
+      <td><a [routerLink]="'/details'" [queryParams]="{  id : pokemon.pokemonId }">Click to know more...</a></td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="noPokemonFound"><tr><td colspan="3" style="text-align: center;padding-top: 5%;">No Such Pokemon Found</td></tr></tbody>
+  </table>
+  </div>
+  <div *ngIf="!isSearchTriggered" style="text-align: center; padding-top: 2%;"><span style="padding-left: 3%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    Total Pokemons Available :</span><span style="padding-left: 2%;font-weight: bold;font-size: large;">{{totalResults}}</span></div>
+
+  <div *ngIf="isSearchTriggered">
+    <div class="clearButton">
+      <button mat-button color="primary" (click)="clearSearch()">Clear Search <mat-icon>clear</mat-icon></button>
+    </div>
+  </div>
+  </ng-container>

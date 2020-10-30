@@ -1,0 +1,62 @@
+.content{
+    padding: 3% 13% 0% 30%;
+}
+.card{
+    max-width: 60%;
+}
+
+.imageStyle{
+    width: 35%;
+    padding-left: 30%;
+    margin: 0;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+  
+    > div {
+      flex: 50%;
+      padding: 10px;
+    }
+  }
+span{
+    display: inline;
+}
+.eachRow{
+    display: block;
+}
+
+  > .section {
+    background: lightblue;
+    color: black;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+::ng-deep .mat-card-header .mat-card-title{
+    width: 100%;
+    padding-left: 50%;
+    padding-top: 10%;
+    font-size: 250%;
+    color: greenyellow;
+}
+.mat-card-header{
+    background-color: mediumslateblue;
+}
+
+.mat-card {
+    background: white;
+    color: black;
+}
+.attributes{
+    display: inline;font-size: 16px;font-weight: bold;padding-left: 4%;
+}
+
+.homeButton{
+    padding-left: 20%;
+    padding-top: 4%;
+    cursor: pointer;
+  }

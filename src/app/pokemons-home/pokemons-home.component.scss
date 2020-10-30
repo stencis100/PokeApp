@@ -1,0 +1,72 @@
+
+.bG{
+  background-image: url("/background.png");
+
+}
+
+
+table {
+    align-content: center;
+    margin-left : 20%;
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  tr:nth-of-type(odd) { 
+    background: lightgoldenrodyellow; 
+  }
+  tr:nth-of-type(even) { 
+    background:lightgrey; 
+  }
+  th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+    
+  }
+  td, th { 
+    padding: 5px;  
+    text-align: left; 
+  }
+
+.pageScroll {
+    display: block;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .searchInput {
+    width: 20%;
+    color: black;
+    padding: 15px;
+  }
+
+  ::ng-deep .searchInput .mat-form-field-label {
+    /*change color of label*/
+    color: blueviolet !important;
+   }
+
+  ::ng-deep .searchInput .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    opacity: 1 !important;
+    color: darkblue !important;
+  }
+
+  .searchIcon{
+      display: inline-block;
+      position: absolute;
+      cursor: pointer;
+      right: -7px;
+      bottom: 15px;
+  }
+
+  .clearButton{
+    padding-left: 50%;
+    padding-top: 4%;
+  }

@@ -1,0 +1,49 @@
+<div class="container content">
+
+    <mat-card class="card mat-elevation-z5" *ngIf="loadDetailsCard">
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title class="cardHeader">{{pokemonDetails.stats.name | uppercase}}</mat-card-title>
+        </mat-card-header>
+        <img class="imageStyle"
+        mat-card-image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/{{id}}.png" >
+        <mat-card-content>
+          <div class="flex-row">
+
+          <div class="section">
+          <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; margin-bottom: 5%;">STATISTICS</span>
+          <div class="eachRow"><span>Height :</span><span class="attributes">{{pokemonDetails.stats.height}}</span></div>
+          <div class="eachRow"><span>Weight :</span><span class="attributes">{{pokemonDetails.stats.weight}}</span></div>
+          <div class="eachRow"><span>Base Experience :</span><span class="attributes">{{pokemonDetails.stats.base_experience}}</span></div>
+          <div class="eachRow"><span>Order :</span><span class="attributes">{{pokemonDetails.stats.order}}</span></div>
+        </div>
+        <div class="section" *ngIf="!movesUnavailable">
+          <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; margin-bottom: 5%;">MOVES</span>
+          <div class="eachRow"><span class="col-2">Move Name :</span><span class="attributes">{{pokemonDetails.moves.name | uppercase}}</span></div>
+          <div class="eachRow"><span class="col-2">Power :</span>
+          <span class="attributes">{{pokemonDetails.moves.power && pokemonDetails.moves.power !== '' ? pokemonDetails.moves.power : '--'}}</span></div>
+          <div class="eachRow"><span class="col-2">Accuracy :</span>
+            <span class="attributes">{{pokemonDetails.moves.accuracy && pokemonDetails.moves.accuracy !== '' ? pokemonDetails.moves.accuracy : '--'}}</span></div>
+          <div class="eachRow"><span class="col-2">Damage Class :</span><span class="attributes">{{pokemonDetails.moves.damage_class.name | uppercase}}</span></div>
+          <!-- <span>PP : {{pokemonDetails.moves.pp}}</span>
+          <span>Priority : {{pokemonDetails.moves.priority}}</span> -->
+          <div class="eachRow"><span>Contest Type :</span>
+            <span class="attributes">{{pokemonDetails.moves.contest_type ? pokemonDetails.moves.contest_type.name.toLocaleUpperCase() : '--' }}</span></div>
+          <div class="eachRow"><span>Attack Method :</span>
+            <span class="attributes">{{pokemonDetails.moves.attackMethod && pokemonDetails.moves.attackMethod !=='' ? pokemonDetails.moves.attackMethod.toLocaleUpperCase() : '--'}}</span></div>
+        </div>
+        <div class="section" *ngIf="movesUnavailable">
+          <span style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; margin-bottom: 5%;">
+            MOVES</span>
+          <div><span class="attributes" style="padding: 1%">Moves Unavailable for this Pokemon</span></div>
+        </div>
+
+
+      </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="homeButton">
+        <button mat-button color="primary" [routerLink]="'/'">Go to Main Page<mat-icon style="padding-left: 1%;">home</mat-icon></button>
+      </div>
+</div>
